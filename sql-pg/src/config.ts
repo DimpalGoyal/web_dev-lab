@@ -1,0 +1,1 @@
+export const PG_URL = 'postgresql://postgres:password123@localhost:5432/postgres'
