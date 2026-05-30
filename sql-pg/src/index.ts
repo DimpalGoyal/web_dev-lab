@@ -1,27 +1,20 @@
-import { Client } from 'pg'
-import { PG_URL } from './config'
- 
+import { Client } from "pg";
+import { PG_URL } from "./config";
+
 const client = new Client({
-  connectionString: PG_URL
-})
+  connectionString: PG_URL,
+});
 
 async function createUsersTable() {
-    try{
-    await client.connect()
+  try {
+    await client.connect();
     const result = await client.query(`
-        CREATE TABLE users (
-            id SERIAL PRIMARY KEY,
-            username VARCHAR(50) UNIQUE NOT NULL,
-            email VARCHAR(255) UNIQUE NOT NULL,
-            password VARCHAR(255) NOT NULL,
-            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-        );
-    `)
-    console.log(result)
-
-    }catch(err){
-        console.log(err)
-    }
+    SELECT * FROM users;
+    `);
+    console.log(result.rows);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 createUsersTable();
